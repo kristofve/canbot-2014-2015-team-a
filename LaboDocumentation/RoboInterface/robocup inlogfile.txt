@@ -1,0 +1,29 @@
+Robocup netwerk:
+HLCZqT2hKN
+
+connectie met laptop:
+ssh -l pi 192.168.1.11 of .12 voor tweede robotje
+user: pi
+pass: raspberry
+
+connectie in lokaal vaste pc:
+sudo route add -net 192.168.1.0 netmask 255.255.255.0 gw 10.66.174.26
+
+serieel comando:
+minicom		
+
+
+GIT:
+toevoegen repository:
+git clone https://...@googlecode/p/canbot-2014-2015-team-a/				
+instellingen aanpassen:
+git --config ...
+ophalen:
+git pull
+klaar om update:
+git commit -m "message"
+doorsturen:
+git push:
+
+status opvragen:
+git status													
