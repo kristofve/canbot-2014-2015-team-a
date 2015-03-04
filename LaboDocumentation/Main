@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 	RoboInterface inter(-1, -1);
 	Pad weg;
    
-bool gepakt = true; //Verkeerd, moet nog aangepast worden
+
 	while(1)
 	{
     if(inter.getCollected() == true)
