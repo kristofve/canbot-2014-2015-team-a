@@ -8,7 +8,7 @@
 #include<cmath>
 //afstand tussen grid eenheden in mm
 //bv 10 geeft een veld opgedeeld in cm²
-#define GRIDRESOLUTION 10
+#define GRIDRESOLUTION 1
 #define PI 3.14159265
 
 using namespace std;
