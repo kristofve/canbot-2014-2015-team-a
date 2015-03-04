@@ -4,14 +4,14 @@
  * @brief Contains the entry function for the project
  */
 
-#include "../Pad/Pad.cpp"
-#include 
-#include 
+#include "Pad.cpp"
+#include "RoboInterface.cpp"
+/*#include 
 #include 
 #include
 #include 
 #include 
-#include 
+#include */
 #include <string.h>
 #include <vector>
 
@@ -23,28 +23,28 @@ using namespace std;
 int main(int argc, char *argv[]) {
 	// Initialize wifistuff
 	// Klasse van Robot, Garage en Blikje declareren
-	RobotData r_d();
+	/*RobotData r_d();
 	CarHouseData ch_d();
-	CupData c_d();
-	Can blikje(-1, -1);
-	Pad weg();
-
+	CupData c_d();*/
+	RoboInterface inter(-1, -1);
+	Pad weg;
+   
+bool gepakt = true; //Verkeerd, moet nog aangepast worden
 	while(1)
 	{
-
-      
-    if(gepakt == true)
+    if(inter.getCollected() == true)
     {
-       weg->calc(r_d->getX(), r_d->getY(), r_d->getAngle(), c_d->getX(), c_d->getY());
-       cout << "afstand:" << weg->getDistance();
-       cout << "hoek:" << weg->getAngle();
-       blikje->set(weg->getDistance(), weg->getAngle());
+       weg.calc(1, 1, 20, 300, 158); //WERKT!
     }
     else
     {
-    		weg->calc(r_d->getX(), r_d->getY(), r_d->getAngle(), c_d->getX(), c_d->getY());
-        blikje->set();
+       weg->calc(r_d->getX(), r_d->getY(), r_d->getAngle(), c_d->getX(), c_d->getY());
     }
+    
+    inter.setDistance(weg.getDistance());
+    inter.setAngle(weg.getAngle());
+    inter.move(); //voorlopig stub, komt bewegingsfunctionaliteit van robot in
+    inter.printCan();
 	}	
 	
 	return 0;
