@@ -14,5 +14,5 @@ class RoboInterface{
 		void setAngle(int myAngle);
 		void setCollected(bool myCollected);
 		void printCan() {std::cout<<"distance: " <<getDistance()<< " angle: " << getAngle()<< " isCollected? " << isCollected() << "\n";}
-};
 		void move();
+};
