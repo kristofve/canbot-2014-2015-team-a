@@ -1,0 +1,51 @@
+/** 
+ * @file Main.cpp
+ * @author Sander Grielens
+ * @brief Contains the entry function for the project
+ */
+
+#include "../Pad/Pad.cpp"
+#include 
+#include 
+#include 
+#include
+#include 
+#include 
+#include 
+#include <string.h>
+#include <vector>
+
+using namespace std;
+
+/** @brief The entry function for the project 
+ *  @return 0 is no error occured	
+ * **/
+int main(int argc, char *argv[]) {
+	// Initialize wifistuff
+	// Klasse van Robot, Garage en Blikje declareren
+	RobotData r_d();
+	CarHouseData ch_d();
+	CupData c_d();
+	Can blikje(-1, -1);
+	Pad weg();
+
+	while(1)
+	{
+
+      
+    if(gepakt == true)
+    {
+       weg->calc(r_d->getX(), r_d->getY(), r_d->getAngle(), c_d->getX(), c_d->getY());
+       cout << "afstand:" << weg->getDistance();
+       cout << "hoek:" << weg->getAngle();
+       blikje->set(weg->getDistance(), weg->getAngle());
+    }
+    else
+    {
+    		weg->calc(r_d->getX(), r_d->getY(), r_d->getAngle(), c_d->getX(), c_d->getY());
+        blikje->set();
+    }
+	}	
+	
+	return 0;
+}
