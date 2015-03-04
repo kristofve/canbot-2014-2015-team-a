@@ -73,3 +73,27 @@ int main () {
 
   return 0;
 }
+
+/*
+*		constructor
+*		toekenning + berekenen van score
+*/
+Vak::Vak(int x,int y,int angle, int dx, int dy, Vak* parent) {
+		cout << "Calculating for:"<< endl;
+		cout << "Vakje(" << x << "," << y <<")"<< endl;		
+		this->x = x;
+		this->y = y;
+		cout << "hoek(" << angle*45 << "," << y <<")"<< endl;
+		this->theta= angle;
+		this->parent = parent;
+		this->score =(abs((x-dx)+(y-dy)) + theta*THETAFACTOR );	
+		cout << "score for:"<< endl;
+		cout << "Vak created"<< endl;
+}
+
+void Vak::print() {
+		cout << "Vakje(" << x << "," << y <<")"<< endl;		
+		cout << "hoek(" << theta*45 << "," << y <<")"<< endl;	
+		cout << "score for:"<< score << endl;
+		cout << "Vak created"<< endl;
+}

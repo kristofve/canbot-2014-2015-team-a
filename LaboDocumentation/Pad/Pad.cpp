@@ -7,15 +7,21 @@ using namespace std;
 int main () {
   Pad pad;
   pad.calc(0,0,3,1,1);
-  
-  
-	for(int i = 0; i < FIELDX; i++){
-		cout << "rij: " << i << ": ";
-		for(int j = 0; j<FIELDY; j++){
-			cout << " "<< j <<" ";
-		}
-		cout << endl;
-	}
   return 0;
 }
 
+/*
+*		berekenen van tussenliggende hoek
+*		berekenen van afstand
+*/
+void Pad::calc(int x,int y,int angle, int dx, int dy) {
+		cout << "Calculating for:"<< endl;
+		cout << "start(" << x << "," << y <<"," << angle <<")"<< endl;
+		cout << "end(" << dx << "," << dy << ")"<< endl;
+		
+		this->distance = sqrt((dx-x)*(dx-x)+(dy-y)*((dy-y))) * GRIDRESOLUTION;	
+		this->angle = atan2((dy-y),(dx-x))* 180 / PI - angle;
+		
+		cout << "Distance: " << this->getDistance() << endl;
+		cout << "Angle: " << this->getAngle()<< endl;
+}
