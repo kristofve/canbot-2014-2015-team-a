@@ -1,0 +1,98 @@
+/**
+ * @file Client.h
+ * @author Frans Stijn
+ * @brief Defines the class 'Client', Which will setup the client.
+ */
+#ifndef Client_H
+#define Client_H
+
+#include <iostream>
+#include <iomanip>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <signal.h>
+#include <netdb.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <vector>
+#include "thread.h"
+#include "RobotData.h"
+#include "ObstacleData.h"
+#include "Point.h"
+
+#define       UDPPORT       3200
+#define       INBUFLEN      2048 
+
+using namespace std;
+struct robotinfo{
+int acheck;
+int ax;
+int ay;
+int aa;
+int axg;
+int ayg;
+int axc;
+int ayc;
+int bcheck;
+int bx;
+int by;
+int ba;
+int bxg;
+int byg;
+int bxc;
+int byc;
+int obs[20];
+};
+
+/**
+ * @brief Defines the class 'Client', Which will setup the client.
+ */
+class Client : public Thread
+{
+		
+       static Client* instance;
+		/**
+		 * @brief Constructor of the class Client.
+		 */
+     	Client();
+
+       public:
+		/**
+		 * @brief Runfunction of thead
+		 */
+       void run();
+		/**
+		 * @brief Making of Singleton class of type Client.
+		 *
+		 * @return	pointer to the Singleton instance.
+		 */
+       static Client* getInstance();
+		/**
+		 * @brief transferring the received data
+		 * @param	Pointer of type RobotData to ownRobot.
+		 * @param 	Pointer of type RobotData to other team's Robot.
+		 * @param 	Pointer of type vector<ObstacleData> to the obstacles
+		 * @return	Boolean true if message received
+		 */
+
+	bool receive(RobotData *robot,RobotData *robotb, vector<Point> obstacles);
+
+
+       private:
+
+       int init();
+	char inbuf[INBUFLEN];
+int lengte;
+
+
+       int sock;
+       struct sockaddr_in cliAddr;       
+       struct sockaddr_in servAddr;                     
+
+                                     
+};
+
+#endif	/* Client_H */

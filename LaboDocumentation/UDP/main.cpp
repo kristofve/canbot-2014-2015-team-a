@@ -1,0 +1,44 @@
+#include <cstdlib>
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <string.h>
+#include <unistd.h>
+#include "Client.h"
+#include "RobotData.h"
+//#include "ObstacleData.h"
+
+using namespace std;
+
+/*RobotData *rob = new RobotData();
+RobotData *robb = new RobotData();
+vector<ObstacleData> *obstacles = new vector<ObstacleData>();
+*/
+
+void fillrobot(int gegevens[])
+{
+
+}
+
+int main(int argc, char* argv[])
+{
+    Client *client;
+    client = Client::getInstance();
+    client->run();
+       /*
+       while(1)
+       {
+           if(hoi->receive(rob,robb,obstacles))             //Receive string
+           {
+		rob->print();
+		cout << endl << endl << endl;
+		robb->print();
+		cout << endl << endl << endl;
+		for (std::vector<ObstacleData>::iterator it = obstacles->begin() ; it != obstacles->end(); ++it)
+			it->print();
+		cout << endl << endl << endl;
+	   }
+	}
+	*/
+
+}

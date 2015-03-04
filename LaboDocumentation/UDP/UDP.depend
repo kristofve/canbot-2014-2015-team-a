@@ -1,0 +1,55 @@
+# depslib dependency file v1.0
+1424861197 source:/home/robocup/Documents/TeamA/UDP/Client.cpp
+	"Client.h"
+
+1424860204 /home/robocup/Documents/TeamA/UDP/Client.h
+	<iostream>
+	<iomanip>
+	<string.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<signal.h>
+	<netdb.h>
+	<stdlib.h>
+	<stdio.h>
+	<vector>
+	"thread.h"
+	"RobotData.h"
+	"ObstacleData.h"
+	"Point.h"
+
+1424254827 /home/robocup/Documents/TeamA/UDP/thread.h
+	<iostream>
+	<string.h>
+	<pthread.h>
+
+1424861510 /home/robocup/Documents/TeamA/UDP/RobotData.h
+	<string>
+	<iostream>
+
+1424858945 /home/robocup/Documents/TeamA/UDP/ObstacleData.h
+	<string>
+	<iostream>
+	"Point.h"
+
+1424254828 /home/robocup/Documents/TeamA/UDP/Point.h
+
+1424861318 source:/home/robocup/Documents/TeamA/UDP/main.cpp
+	<cstdlib>
+	<iostream>
+	<stdio.h>
+	<vector>
+	<string.h>
+	"Client.h"
+	"RobotData.h"
+
+1424861478 source:/home/robocup/Documents/TeamA/UDP/RobotData.cpp
+	"RobotData.h"
+
+1424254827 source:/home/robocup/Documents/TeamA/UDP/thread.cpp
+	"thread.h"
+	<iostream>
+	<pthread.h>
+
