@@ -48,7 +48,7 @@ void elMove(char myChar){
 }
 
 void move(int myAngle, int myDistance){
-	int l = sin(myAngle) * reqSpeed;
+	int l = (int) (sin(myAngle) * reqSpeed);
 	int r = cos(myAngle) * reqSpeed;
 	char bufferL[3];
 	char bufferR[3];
@@ -58,8 +58,35 @@ void move(int myAngle, int myDistance){
 	
 	serialPutchar(fd, 'q');
 	serialPutchar(fd, ' ');
+	int lSpeedLoop = 2;
 	for(int i = 0; i < 3; i++){
 		//check voor eerste nullen anders break
+		if(isdigit(bufferL[2-i])){
+			if(bufferL[2-i] != 0){
+				break;
+			}
+		}
+		lSpeedLoop--;
+	}
+	for(int j = lSpeedLoop; j > 0; j--){
+		serialPutchar(fd, bufferL[j]);
 	}	
+	serialPutchar(fd, ' ');
+	int rSpeedLoop = 2;
+	for(int i = 0; i < 3; i++){
+		//check voor eerste nullen anders break
+		if(isdigit(bufferR[2-i])){
+			if(bufferR[2-i] != 0){
+				break;
+			}
+		}
+		rSpeedLoop--;
+	}
+	for(int j = rSpeedLoop; j > 0; j--){
+		serialPutchar(fd, bufferR[j]);
+	}	
+	delay(3000);
+	serialPutchar(fd, 'q');
+	serialPutchar(fd, ' ');
 
 }
