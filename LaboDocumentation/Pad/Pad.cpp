@@ -4,12 +4,6 @@ using namespace std;
 #define FIELDX 10
 #define FIELDY 15
 
-int main () {
-  Pad pad;
-  pad.calc(0,0,3,1,1);
-  return 0;
-}
-
 /*
 *		berekenen van tussenliggende hoek
 *		berekenen van afstand
