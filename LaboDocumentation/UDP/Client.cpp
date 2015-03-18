@@ -30,12 +30,19 @@ Client::Client()
 int Client::init()
 {
 
-    sockfd = socket(AF_INET,SOCK_DGRAM,0);
+    sockfd = socket(AF_INET, SOCK_DGRAM,0);
     bzero(&servaddr_a,sizeof(servaddr_a));
 
     servaddr_a.sin_family = AF_INET;
-    servaddr_a.sin_addr.s_addr=INADDR_ANY;
+    servaddr_a.sin_addr.s_addr=htonl(INADDR_ANY);
     servaddr_a.sin_port=htons(UDPPORT);
+
+    if (bind(sockfd, (struct sockaddr *) &servaddr_a, sizeof(servaddr_a)) == -1) {
+                std::cerr << "Error binding UDP socket" << std::endl;
+                return -1;
+        }
+
+    std::cout << "Server gestart" << std::endl;
 
     return 0;
 }
@@ -43,13 +50,24 @@ int Client::init()
 void Client::run()
 {
 	socklen_t len;
-	len = sizeof(servaddr_a);
+	len = sizeof(clientaddr_a);
 
     while(1)
     {
-        lengte = recvfrom(sockfd, &udp_package, sizeof(struct Udp_package), 0, (struct sockaddr*)&servaddr_a, &len);
-        cout<<"ontvangen ["<< lengte << "]" << endl;
-        cout<<"\t"<<udp_package.groep_a<<endl;
+        lengte = recvfrom(sockfd, &udp_package, sizeof(struct Udp_package), 0, (struct sockaddr*)&clientaddr_a, &len);
+        cout<<"ontvangen ["<< lengte << "]" << endl <<endl;
+        Info data = udp_package.info_a;
+        cout<<"doel:"<<endl;
+        cout<<"\tx: "<<udp_package.info_a.doelx<<endl;
+        cout<<"\ty: "<<udp_package.info_a.doely<<endl;
+        cout<<"garage:"<<endl;
+        cout<<"\tx: "<<udp_package.info_a.garx<<endl;
+        cout<<"\ty: "<<udp_package.info_a.gary<<endl;
+        cout<<"robot:"<<endl;
+        cout<<"\tx: "<<udp_package.info_a.robx<<endl;
+        cout<<"\ty: "<<udp_package.info_a.roby<<endl;
+        cout<<"\ta: "<<udp_package.info_a.robhoek<<endl<<endl;
+
     }
     close(sockfd);
 }

@@ -19,9 +19,6 @@
 #include <stdio.h>
 #include <vector>
 
-//#include "thread.h"
-#include "RobotData.h"
-#include "ObstacleData.h"
 #include "Point.h"
 #include "Package.h"
 
@@ -38,50 +35,22 @@ using namespace std;
  */
 class Client //: public Thread
 {
-        int sockfd,n;
-        int sockGroepB;
-        struct sockaddr_in servaddr_a;
-        struct sockaddr_in servaddr_GroepB;
-
        static Client* instance;
 
-
     public:
-		/**
-		 * @brief Runfunction of thead
-		 */
        void run();
-		/**
-		 * @brief Making of Singleton class of type Client.
-		 *
-		 * @return	pointer to the Singleton instance.
-		 */
        static Client* getInstance();
-		/**
-		 * @brief transferring the received data
-		 * @param	Pointer of type RobotData to ownRobot.
-		 * @param 	Pointer of type RobotData to other team's Robot.
-		 * @param 	Pointer of type vector<ObstacleData> to the obstacles
-		 * @return	Boolean true if message received
-		 */
-
-        //bool receive(RobotData *robot, RobotData *robotb, vector<Point> obstacles);
-
 
     private:
-        Client();
+       Client();
        int init();
-       char inbuf[INBUFLEN];
        int lengte;
 
-       int sock;
-       struct sockaddr_in cliAddr;
-       struct sockaddr_in servAddr;
-       Udp_package udp_package;
-       /**
-		 * @brief Constructor of the class Client.
-		 */
+       int sockfd,n;
+       struct sockaddr_in servaddr_a;
+       struct sockaddr_in clientaddr_a;
 
+       Udp_package udp_package;
 };
 
 #endif	/* Client_H */
