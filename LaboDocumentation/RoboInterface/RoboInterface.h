@@ -1,18 +1,18 @@
 #include <iostream>
 
 class RoboInterface{
-	int distance;
-	int angle;
+	double distance;
+	double angle;
 	bool collected;
 
 	public:
 		RoboInterface(int,int);
-		int getDistance() {return distance;}
-		int getAngle() {return angle;}
-		bool isCollected() {return collected;}
+		double getDistance();
+		double getAngle();
+		bool isCollected();
 		void setDistance(int myDistance);
 		void setAngle(int myAngle);
 		void setCollected(bool myCollected);
-		void printCan() {std::cout<<"distance: " <<getDistance()<< " angle: " << getAngle()<< " isCollected? " << isCollected() << "\n";}
+		void printCan();
 		void move();
-;}
+};

@@ -12,6 +12,14 @@ sudo route add -net 192.168.1.0 netmask 255.255.255.0 gw 10.66.174.26
 serieel comando:
 minicom		
 
+m	start menu
+p	power-on test
+t	LED test
+v	voltage sensor test
+g	send [close 0, open 1]
+q	speed mode [L] [R]
+u	read distance sensor
+
 
 GIT:
 toevoegen repository:
