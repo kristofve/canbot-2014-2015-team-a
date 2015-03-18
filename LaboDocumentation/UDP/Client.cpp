@@ -47,28 +47,28 @@ int Client::init()
     return 0;
 }
 
-void Client::run()
+Info Client::getData()
 {
 	socklen_t len;
 	len = sizeof(clientaddr_a);
 
-    while(1)
-    {
-        lengte = recvfrom(sockfd, &udp_package, sizeof(struct Udp_package), 0, (struct sockaddr*)&clientaddr_a, &len);
-        cout<<"ontvangen ["<< lengte << "]" << endl <<endl;
-        Info data = udp_package.info_a;
-        cout<<"doel:"<<endl;
-        cout<<"\tx: "<<udp_package.info_a.doelx<<endl;
-        cout<<"\ty: "<<udp_package.info_a.doely<<endl;
-        cout<<"garage:"<<endl;
-        cout<<"\tx: "<<udp_package.info_a.garx<<endl;
-        cout<<"\ty: "<<udp_package.info_a.gary<<endl;
-        cout<<"robot:"<<endl;
-        cout<<"\tx: "<<udp_package.info_a.robx<<endl;
-        cout<<"\ty: "<<udp_package.info_a.roby<<endl;
-        cout<<"\ta: "<<udp_package.info_a.robhoek<<endl<<endl;
+    lengte = recvfrom(sockfd, &udp_package, sizeof(struct Udp_package), 0, (struct sockaddr*)&clientaddr_a, &len);
 
-    }
+    return udp_package.info_a;
+
+    /*cout<<"ontvangen ["<< lengte << "]" << endl <<endl;
+    cout<<"doel:"<<endl;
+    cout<<"\tx: "<<udp_package.info_a.doelx<<endl;
+    cout<<"\ty: "<<udp_package.info_a.doely<<endl;
+    cout<<"garage:"<<endl;
+    cout<<"\tx: "<<udp_package.info_a.garx<<endl;
+    cout<<"\ty: "<<udp_package.info_a.gary<<endl;
+    cout<<"robot:"<<endl;
+    cout<<"\tx: "<<udp_package.info_a.robx<<endl;
+    cout<<"\ty: "<<udp_package.info_a.roby<<endl;
+    cout<<"\ta: "<<udp_package.info_a.robhoek<<endl<<endl;
+    */
+
     close(sockfd);
 }
 /*

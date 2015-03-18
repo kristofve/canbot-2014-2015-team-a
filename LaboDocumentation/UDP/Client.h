@@ -38,7 +38,7 @@ class Client //: public Thread
        static Client* instance;
 
     public:
-       void run();
+       Info getData();
        static Client* getInstance();
 
     private:

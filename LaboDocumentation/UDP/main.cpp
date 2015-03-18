@@ -5,7 +5,6 @@
 #include <string.h>
 #include <unistd.h>
 #include "Client.h"
-#include "RobotData.h"
 //#include "ObstacleData.h"
 
 using namespace std;
@@ -24,21 +23,22 @@ int main(int argc, char* argv[])
 {
     Client *client;
     client = Client::getInstance();
-    client->run();
-       /*
-       while(1)
-       {
-           if(hoi->receive(rob,robb,obstacles))             //Receive string
-           {
-		rob->print();
-		cout << endl << endl << endl;
-		robb->print();
-		cout << endl << endl << endl;
-		for (std::vector<ObstacleData>::iterator it = obstacles->begin() ; it != obstacles->end(); ++it)
-			it->print();
-		cout << endl << endl << endl;
-	   }
-	}
-	*/
+    Info data;
 
+    while(1){
+        data = client->getData();
+        /*
+        cout<<"***** Ontvangen ******" << endl <<endl;
+        cout<<"doel:"<<endl;
+        cout<<"\tx: "<<data.doelx<<endl;
+        cout<<"\ty: "<<data.doely<<endl;
+        cout<<"garage:"<<endl;
+        cout<<"\tx: "<<data.garx<<endl;
+        cout<<"\ty: "<<data.gary<<endl;
+        cout<<"robot:"<<endl;
+        cout<<"\tx: "<<data.robx<<endl;
+        cout<<"\ty: "<<data.roby<<endl;
+        cout<<"\ta: "<<data.robhoek<<endl<<endl;
+        */
+    }
 }
