@@ -23,15 +23,34 @@ u	read distance sensor
 
 GIT:
 toevoegen repository:
-git clone https://...@googlecode/p/canbot-2014-2015-team-a/				
+git clone https://...@googlecode/p/canbot-2014-2015-team-a/
+				
 instellingen aanpassen:
 git --config ...
+
 ophalen:
 git pull
+
+bestand toevoegen aan stage:
+git add *naam*
+
 klaar om update:
 git commit -m "message"
+
 doorsturen:
-git push:
+git push origin *branchnaam* (meestal master)
 
 status opvragen:
-git status													
+git status
+
+reset naar een bepaalde commit:
+git reset --hard *commit-ID*
+
+creëer branch:
+git branch *branchnaam*
+
+switch naar branch:
+git checkout *branchnaam*
+
+haal branch van een ander op:
+git checkout --track origin/*branchnaam*								
