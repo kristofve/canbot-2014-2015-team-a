@@ -4,10 +4,10 @@
  * @brief Contains the entry function for the project
  */
 
-#include "Pad.h"
-#include "RoboInterface.h"
+#include "Pad/Pad.h"
+#include "RoboInterface/RoboInterface.h"
+#include "UDP/Client.h"
 /*#include 
-#include 
 #include
 #include 
 #include 
@@ -22,27 +22,28 @@ using namespace std;
  * **/
 int main(int argc, char *argv[]) {
 	// Initialize wifistuff
-	// Klasse van Robot, Garage en Blikje declareren
-	/*RobotData r_d();
-	CarHouseData ch_d();
-	CupData c_d();*/
+	Client *client;
+    	client = Client::getInstance();
+    	Info data;
 	RoboInterface inter(-1, -1);
 	Pad weg;
-bool gepakt = true;
+	bool gepakt = true;
+
 	while(1)
 	{
+        	data = client->getData();
 
       
-    if(gepakt == true)
-    {
-       weg.calc(1, 1, 20, 300, 158);
-       inter.setDistance(weg.getDistance());
-	inter.setAngle(weg.getAngle());
-	cout << "Start Move" << endl;
-	inter.move();
-	cout << "END Move" << endl;
-	inter.printCan();
-    }
+		if(gepakt == true)
+    		{
+       			weg.calc(data.robx, data.roby, data.robhoek, data.doelx, data.doely);
+		        inter.setDistance(weg.getDistance());
+			inter.setAngle(weg.getAngle());
+			cout << "Start Move" << endl;
+			inter.move();
+			cout << "END Move" << endl;
+			inter.printCan();
+		}
     /*else
     {
        weg->calc(r_d->getX(), r_d->getY(), r_d->getAngle(), c_d->getX(), c_d->getY());
