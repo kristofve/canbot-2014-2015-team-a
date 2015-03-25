@@ -1,11 +1,11 @@
 #include "RoboInterface.h"
-#include "Robo.h"
 #include <iostream>
 
 RoboInterface::RoboInterface(int myDistance, int myAngle) {
         distance = myDistance;
         angle = myAngle;
         collected = false;
+	robo = Robo(30);
 }
 
 void RoboInterface::setDistance(int myDistance){
@@ -20,7 +20,6 @@ void RoboInterface::setCollected(bool myCollected){
         collected = myCollected;
 }
 void RoboInterface::move(){
-        Robo robo(30);
         robo.move(angle,distance);
 }
 

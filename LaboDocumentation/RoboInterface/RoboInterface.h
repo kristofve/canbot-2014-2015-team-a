@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Robo.h"
 #ifndef _H_ROBOINTERFACE
 #define _H_ROBOINTERFACE
 
@@ -6,6 +7,7 @@ class RoboInterface{
         int distance;
         int angle;
         bool collected;
+	Robo robo;
 
         public:
                 RoboInterface(int,int);

@@ -17,12 +17,20 @@
 
 int fd;
 int reqSpeed;
+Robo::Robo(){
+	 if ((fd = serialOpen ("/dev/ttyUSB0", 38400)) < 0)
+        {
+                fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
+        }
+        cout << fd << endl;
+}
 Robo::Robo(int myReqSpeed){
         reqSpeed = myReqSpeed;
         if ((fd = serialOpen ("/dev/ttyUSB0", 38400)) < 0)
         {
                 fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
         }
+	cout << fd << endl;
 }
 
 int Robo::getDistanceSensor(){
@@ -50,6 +58,7 @@ void elMove(char myChar){
 }
 
 void Robo::move(int myAngle, int myDistance){
+	cout << "We zijn binnen"<<endl;
         int l = (int) (sin(myAngle) * reqSpeed);
         int r = cos(myAngle) * reqSpeed;
         char bufferL[3];
@@ -59,7 +68,9 @@ void Robo::move(int myAngle, int myDistance){
 	out << l;
 	const char* templ = out.str().c_str();
 	strncpy ( bufferL, templ, 3 );
-        //itoa(l, bufferL, 10);
+	cout << "n L zit" << l<<endl;
+	cout << "den buffer is" << bufferL<<endl;
+        //itoa(l, bufferL, 10)
         //itoa(r, bufferR, 10);
 	std::stringstream out2;
 	out2 << r;
@@ -77,6 +88,8 @@ void Robo::move(int myAngle, int myDistance){
                         }
                 }
                 lSpeedLoop--;
+	cout << "den buffer is" << bufferL<<endl;
+		
         }
         for(int j = lSpeedLoop; j > 0; j--){
                 serialPutchar(fd, bufferL[j]);
@@ -96,8 +109,8 @@ void Robo::move(int myAngle, int myDistance){
                 serialPutchar(fd, bufferR[j]);
         }      
         delay(3000);
-        serialPutchar(fd, 'q');
-        serialPutchar(fd, ' ');
+       // serialPutchar(fd, 'q');
+       // serialPutchar(fd, ' ');
 
 }
 

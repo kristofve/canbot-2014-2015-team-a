@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 		        inter.setDistance(weg.getDistance());
 			inter.setAngle(weg.getAngle());
 			cout << "Start Move" << endl;
-			inter.move();
+			inter.move(weg.getAngle(),weg.getDistance());
 			cout << "END Move" << endl;
 			inter.printCan();
 		}
