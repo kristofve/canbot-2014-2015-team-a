@@ -4,9 +4,9 @@
  * @brief Contains the entry function for the project
  */
 
-#include "Pad/Pad.h"
-#include "RoboInterface/RoboInterface.h"
-#include "UDP/Client.h"
+#include "./Pad/Pad.h"
+#include "./RoboInterface/RoboInterface.h"
+#include "./UDP/Client.h"
 /*#include 
 #include
 #include 
