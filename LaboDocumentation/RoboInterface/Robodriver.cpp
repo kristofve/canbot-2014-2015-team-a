@@ -10,6 +10,7 @@ Robodriver::Robodriver()
         sleep(1);
         printf(".\n");
     }
+    setup();
     printf("Let's do a power-on test, shall we? \n");
     execute(POWER, 0);
 
@@ -98,6 +99,7 @@ int Robodriver::sendCommand(char* command)
     {
         const unsigned char singlechar = command[0];
         serialPutchar(fd, singlechar);
+        serialPutchar(fd, 13);
     }
     else if (strlen(command) > 1)
     {
