@@ -25,22 +25,23 @@ int main(int argc, char *argv[]) {
 	Client *client;
     	client = Client::getInstance();
     	Info data;
-	Robot robert();
+	Robot robert;
 	Pad weg;
 	bool gepakt = true;
+	int status;
 
 	while(1)
 	{
-        	data = client->getData();
+ //       	data = client->getData();
 
 
 		if(gepakt == true)
     		{
-       			weg.calc(data.robx, data.roby, data.robhoek, data.doelx, data.doely);
-                cout << "Start Move" << endl;
-       			robert.ride(weg.getAngle(), weg.getDistance());
-                cout << "END Move" << endl;
-                robert.printCan();
+//       			weg.calc(data.robx, data.roby, data.robhoek, data.doelx, data.doely);
+	                cout << "Start Move" << endl;
+       			//robert.ride(weg.getAngle(), weg.getDistance());
+       			status = robert.ride(45, 630);
+        	        cout << "END Move" << endl;
 		}
     /*else
     {

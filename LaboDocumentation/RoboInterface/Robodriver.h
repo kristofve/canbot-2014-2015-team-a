@@ -16,7 +16,7 @@
 #define FILENAME "/dev/ttyUSB0"
 #define BAUDRATE 38400
 
-#define TURNRATE 90
+#define TURNRATE 45
 #define MOVERATE 100
 #define SPEED 100
 #define CMDSIZE 15

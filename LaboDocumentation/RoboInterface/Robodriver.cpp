@@ -25,7 +25,7 @@ int Robodriver::execute(Action type, float distance)
 {
     char* cmd = buildCommand(type);
     //moet misschien float zijn?
-    int duration = 0;
+    float duration = 0;
 
     if ((type == 1) || (type == 2))
     {
@@ -37,12 +37,16 @@ int Robodriver::execute(Action type, float distance)
     }
 
     sendCommand(cmd);
-    printf("sending command \"%s\" with duration %d \n",cmd, duration);
+    cout << "sending command "<<cmd<<endl;
+    cout << "with duration " << duration<<endl;
+    
     sleep(duration);
+    
     char* stop = buildCommand(STOP);
     printf("stopping this shit right here. \n");
     sendCommand(stop);
 
+    
     delete[] cmd;
     delete[] stop;
 
@@ -51,6 +55,7 @@ int Robodriver::execute(Action type, float distance)
 
 char* Robodriver::buildCommand(Action type)
 {
+    cout<< "	We gaan een commando van type "<<type<< " bouwen"<<endl;
     char prefix = 'q';
     int lspeed, rspeed, grip;
     switch(type)
@@ -72,21 +77,29 @@ char* Robodriver::buildCommand(Action type)
     string command;
     if (type <= 4)
     {
-        command = prefix + " " + toString(lspeed) + " " + toString(rspeed);
+        command = "q " + toString(lspeed) + " " + toString(rspeed);
     }
-    else if (type > 6)
+    else if (type == 7)
     {
-        command = prefix;
+        command = "u";
     }
+    else if (type == 8)
+    {
+        command = "t";
+    }
+	
     else
     {
-        command = prefix + " " + grip;
+	command == "g " + toString(grip);
     }
-    strncpy(cmd,command.c_str(),command.size()-1);
-    cmd[strlen(cmd)] = 13;
-    cmd[strlen(cmd)+1] = '\0';
 
-    printf("command length: %zd \n", strlen(cmd));
+    cout << "	Dit zit er in command voor toevoeging:" << command <<endl;
+    strncpy(cmd,command.c_str(),CMDSIZE-1);
+    cout << "	Dit zit er in cmd voor toevoeging:" << cmd <<endl;
+    cmd[command.size()] = 13;
+    cmd[command.size()+1] = '\0';
+    cout << "	Dit zit er in cmd na toevoeging:" << cmd <<endl;
+    printf("	command length: %zd \n", strlen(cmd));
     return cmd;
 
 
@@ -113,7 +126,7 @@ int Robodriver::sendCommand(char* command)
 
 int Robodriver::setup()
 {
-    if ((fd = serialOpen(FILENAME,BAUDRATE)) < 0)
+   /* if ((fd = serialOpen(FILENAME,BAUDRATE)) < 0)
     {
          fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno));
          return -1;
@@ -121,7 +134,7 @@ int Robodriver::setup()
     else
     {
         fprintf(stdout, "File-descriptor %d successfully opened. \n", fd);
-    }
+    }*/
 
     return 0;
 }
