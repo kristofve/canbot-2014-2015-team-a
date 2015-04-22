@@ -14,7 +14,7 @@ void Pad::calc(int x,int y,int angle, int dx, int dy) {
 		cout << "end(" << dx << "," << dy << ")"<< endl;
 		
 		this->distance = sqrt((dx-x)*(dx-x)+(dy-y)*((dy-y))) * GRIDRESOLUTION;	
-		this->angle = atan2((dy-y),(dx-x))* 180 / PI - angle;
+		this->angle = atan2((dy-y),(dx-x))* 180 / PI;
 		
 		cout << "Distance: " << this->getDistance() << endl;
 		cout << "Angle: " << this->getAngle()<< endl;

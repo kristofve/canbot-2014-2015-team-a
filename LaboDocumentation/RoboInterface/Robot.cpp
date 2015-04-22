@@ -46,7 +46,7 @@ int Robot::ride(float angle, float distance)
         rideSuccess = moveForward(abs(distance));
     }
 
-    if (rideSuccess != 0 || turnSuccess != 0)
+    if (/*rideSuccess != 0 || */turnSuccess != 0)
     {
         return -1;
     }

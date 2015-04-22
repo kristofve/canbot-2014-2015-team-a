@@ -20,15 +20,23 @@ using namespace std;
 /** @brief The entry function for the project
  *  @return 0 is no error occured
  * **/
+	Robot robert;
+
+void deleterob(int a)
+{
+	delete &robert;
+	exit(0);
+}
 int main(int argc, char *argv[]) {
 	// Initialize wifistuff
 	Client *client;
     	client = Client::getInstance();
     	Info data;
-	Robot robert;
+	//Robot robert;
 	Pad weg;
 	bool gepakt = true;
 	int status;
+	signal(SIGCLD, &deleterob);
 
 	while(1)
 	{
@@ -38,7 +46,6 @@ int main(int argc, char *argv[]) {
        			weg.calc(data.robx, data.roby, data.robhoek, data.doelx, data.doely);
 	                cout << "Start Move" << endl;
        			robert.ride(weg.getAngle(), weg.getDistance());
-       			status = robert.ride(45, 630);
         	        cout << "END Move" << endl;
 		}
     /*else
@@ -52,3 +59,4 @@ int main(int argc, char *argv[]) {
 
 	return 0;
 }
+

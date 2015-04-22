@@ -31,7 +31,10 @@ int Robodriver::execute(Action type, float distance)
 
     if ((type == 1) || (type == 2))
     {
-        duration = abs(distance)/TURNRATE;
+        if(distance < 10)
+		duration = 0;
+	else
+		duration = abs(distance)/60.0;
     }
     else if ((type == 3) || (type == 4))
     {
@@ -40,10 +43,10 @@ int Robodriver::execute(Action type, float distance)
 
     sendCommand(cmd);
     cout << "sending command "<<cmd<<endl;
-    cout << "with duration " << duration<<endl;
+    cout << "with duration " << duration * 1000<<endl;
     
-    sleep(duration);
-    if(distance < 10)
+    usleep(duration*1000);
+    if(distance < 30)
     { 
     	char* stop = buildCommand(STOP);
     	printf("stopping this shit right here. \n");
