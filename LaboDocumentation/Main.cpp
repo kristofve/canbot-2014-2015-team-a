@@ -32,14 +32,12 @@ int main(int argc, char *argv[]) {
 
 	while(1)
 	{
- //       	data = client->getData();
-
-
+	       	data = client->getData();
 		if(gepakt == true)
     		{
-//       			weg.calc(data.robx, data.roby, data.robhoek, data.doelx, data.doely);
+       			weg.calc(data.robx, data.roby, data.robhoek, data.doelx, data.doely);
 	                cout << "Start Move" << endl;
-       			//robert.ride(weg.getAngle(), weg.getDistance());
+       			robert.ride(weg.getAngle(), weg.getDistance());
        			status = robert.ride(45, 630);
         	        cout << "END Move" << endl;
 		}

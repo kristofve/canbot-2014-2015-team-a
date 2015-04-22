@@ -10,8 +10,10 @@ Robodriver::Robodriver()
         sleep(1);
         printf(".\n");
     }
+    setup();
     printf("Let's do a power-on test, shall we? \n");
     execute(POWER, 0);
+    
 
 }
 
@@ -41,14 +43,16 @@ int Robodriver::execute(Action type, float distance)
     cout << "with duration " << duration<<endl;
     
     sleep(duration);
-    
-    char* stop = buildCommand(STOP);
-    printf("stopping this shit right here. \n");
-    sendCommand(stop);
+    if(distance < 10)
+    { 
+    	char* stop = buildCommand(STOP);
+    	printf("stopping this shit right here. \n");
+    	sendCommand(stop);
+    	delete[] stop;
+    }
 
     
     delete[] cmd;
-    delete[] stop;
 
     return 0;
 }
@@ -60,8 +64,8 @@ char* Robodriver::buildCommand(Action type)
     int lspeed, rspeed, grip;
     switch(type)
     {
-        case 1:     prefix = 'q'; lspeed = -SPEED; rspeed = SPEED;      break; //links
-        case 2:     prefix = 'q'; lspeed = SPEED; rspeed = -SPEED;      break; //rechts
+        case 1:     prefix = 'q'; lspeed = SPEED; rspeed = -SPEED;      break; //links
+        case 2:     prefix = 'q'; lspeed = -SPEED; rspeed = SPEED;      break; //rechts
         case 3:     prefix = 'q'; lspeed = SPEED; rspeed = SPEED;       break; //vooruit
         case 4:     prefix = 'q'; lspeed = -SPEED; rspeed = -SPEED;     break; //achteruit
         case 5:     prefix = 'g'; grip = '1';                           break; //open
@@ -114,6 +118,7 @@ int Robodriver::sendCommand(char* command)
     }
     else if (strlen(command) > 1)
     {
+	cout <<"			De robot gaat een command krijg" << endl;
         serialPuts(fd, command);
     }
     else
@@ -126,7 +131,7 @@ int Robodriver::sendCommand(char* command)
 
 int Robodriver::setup()
 {
-   /* if ((fd = serialOpen(FILENAME,BAUDRATE)) < 0)
+    if ((fd = serialOpen(FILENAME,BAUDRATE)) < 0)
     {
          fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno));
          return -1;
@@ -134,7 +139,7 @@ int Robodriver::setup()
     else
     {
         fprintf(stdout, "File-descriptor %d successfully opened. \n", fd);
-    }*/
+    }
 
     return 0;
 }
