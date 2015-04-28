@@ -3,8 +3,8 @@
 
 All:	CanbotA
 
-CanbotA: Main.o Pad.o Client.o RoboInterface.o Robo.o wiringPi.o wiringSerial.o piHiPri.o
-	g++ Main.o Pad.o Client.o RoboInterface.o Robo.o wiringPi.o wiringSerial.o piHiPri.o -lpthread -o CanbotA
+CanbotA: Main.o Pad.o Client.o Robot.o Robodriver.o wiringPi.o wiringSerial.o piHiPri.o
+	g++ Main.o Pad.o Client.o Robot.o Robodriver.o wiringPi.o wiringSerial.o piHiPri.o -lpthread -o CanbotA
 # Variable with the options for all the seperate files
 opt = -c -O1
 
@@ -19,8 +19,13 @@ Client.o: UDP/Client.cpp
 	g++ UDP/Client.cpp $(opt)
 	
 # Compile the wifi files
-RoboInterface.o: RoboInterface/RoboInterface.cpp
-	g++ RoboInterface/RoboInterface.cpp $(opt)
-Robo.o: RoboInterface/Robo.cpp
-	g++ -c RoboInterface/Robo.cpp
-
+Robot.o: RoboInterface/Robot.cpp
+	g++ RoboInterface/Robot.cpp $(opt)
+Robodriver.o: RoboInterface/Robodriver.cpp
+	g++ RoboInterface/Robodriver.cpp $(opt)
+wiringPi.o: RoboInterface/wiringPi.c
+	cc RoboInterface/wiringPi.c $(opt)
+wiringSerial.o: RoboInterface/wiringSerial.c
+	cc RoboInterface/wiringSerial.c $(opt)
+piHiPri.o: RoboInterface/piHiPri.c
+	cc RoboInterface/piHiPri.c $(opt)
