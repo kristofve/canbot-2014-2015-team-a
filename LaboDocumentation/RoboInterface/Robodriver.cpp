@@ -19,22 +19,30 @@ Robodriver::Robodriver()
 
 Robodriver::~Robodriver()
 {
-    printf("RIP in peace, driver. \n");
-    serialClose(fd);
+   printf("RIP in peace, driver. \n");
+   char* stop = buildCommand(STOP);
+   sendCommand(stop);
+   sleep(1);
+   serialClose(fd);
 }
 
 int Robodriver::execute(Action type, float distance)
 {
     char* cmd = buildCommand(type);
     //moet misschien float zijn?
-    float duration = 0;
+    float duration = 0.0;
 
     if ((type == 1) || (type == 2))
     {
-        if(distance < 10)
+        if(distance < 5)
 		duration = 0;
 	else
-		duration = abs(distance)/60.0;
+	{
+		if(distance <0)
+			distance *=-1.0;
+		
+		duration = distance/TURNRATE;
+	}
     }
     else if ((type == 3) || (type == 4))
     {
@@ -42,17 +50,17 @@ int Robodriver::execute(Action type, float distance)
     }
 
     sendCommand(cmd);
-    cout << "sending command "<<cmd<<endl;
+//    cout << "sending command "<<cmd<<endl;
     cout << "with duration " << duration * 1000<<endl;
     
     usleep(duration*1000);
-    if(distance < 30)
-    { 
+//    if(distance < 30)
+  //  { 
     	char* stop = buildCommand(STOP);
     	printf("stopping this shit right here. \n");
     	sendCommand(stop);
     	delete[] stop;
-    }
+   // }
 
     
     delete[] cmd;
@@ -67,12 +75,12 @@ char* Robodriver::buildCommand(Action type)
     int lspeed, rspeed, grip;
     switch(type)
     {
-        case 1:     prefix = 'q'; lspeed = SPEED; rspeed = -SPEED;      break; //links
-        case 2:     prefix = 'q'; lspeed = -SPEED; rspeed = SPEED;      break; //rechts
+        case 1:     prefix = 'q'; lspeed = -SPEED; rspeed = SPEED;      break; //links
+        case 2:     prefix = 'q'; lspeed = SPEED; rspeed = -SPEED;      break; //rechts
         case 3:     prefix = 'q'; lspeed = SPEED; rspeed = SPEED;       break; //vooruit
         case 4:     prefix = 'q'; lspeed = -SPEED; rspeed = -SPEED;     break; //achteruit
-        case 5:     prefix = 'g'; grip = '1';                           break; //open
-        case 6:     prefix = 'g'; grip = '0';                           break; //dicht
+        case 5:     prefix = 'g'; grip = '0';                           break; //open
+        case 6:     prefix = 'g'; grip = '1';                           break; //dicht
         case 7:     prefix = 'u';                                       break; //distance sensor lezen
         case 8:     prefix = 't';                                       break; //power-on test
         case 0:     prefix = 'q'; lspeed = 0; rspeed = 0;               break; //stil (bij 0)
@@ -128,6 +136,7 @@ int Robodriver::sendCommand(char* command)
     {
         return -1;
     }
+    cout << "sending command "<<command<<endl;
 
     return 0;
 }

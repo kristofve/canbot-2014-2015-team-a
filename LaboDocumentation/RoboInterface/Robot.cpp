@@ -29,11 +29,11 @@ int Robot::ride(float angle, float distance)
 {
     int turnSuccess, rideSuccess;
     printf("Turning over %f degrees and moving over %f distance. \n",angle,distance);
-    if (angle < 0)
+    if (angle > 8)
     {
         turnSuccess = turnLeft(abs(angle));
     }
-    else
+    else if(angle <-8)
     {
         turnSuccess = turnRight(abs(angle));
     }
@@ -46,7 +46,7 @@ int Robot::ride(float angle, float distance)
         rideSuccess = moveForward(abs(distance));
     }
 
-    if (/*rideSuccess != 0 || */turnSuccess != 0)
+    if (rideSuccess != 0 || turnSuccess != 0)
     {
         return -1;
     }

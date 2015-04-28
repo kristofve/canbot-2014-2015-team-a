@@ -34,28 +34,46 @@ int main(int argc, char *argv[]) {
     	Info data;
 	//Robot robert;
 	Pad weg;
-	bool gepakt = true;
+	bool gepakt = false;
 	int status;
-	signal(SIGCLD, &deleterob);
+	signal(SIGINT, &deleterob);
 
 	while(1)
 	{
 	       	data = client->getData();
-		if(gepakt == true)
+		if(gepakt == false)
     		{
        			weg.calc(data.robx, data.roby, data.robhoek, data.doelx, data.doely);
+       			//weg.calc(1,1,45, 500, 650);
 	                cout << "Start Move" << endl;
        			robert.ride(weg.getAngle(), weg.getDistance());
         	        cout << "END Move" << endl;
+			cout << weg.getDistance()<<endl;
+			if(weg.getDistance() < 50)
+			{
+				int res=robert.grab();
+				if(res != -1)
+					break;
+				gepakt=true;
+			}
 		}
-    /*else
-    {
-       weg->calc(r_d->getX(), r_d->getY(), r_d->getAngle(), c_d->getX(), c_d->getY());
-       cout << "afstand:" << weg->getDistance();
-       cout << "hoek:" << weg->getAngle();
-       // blikje->set();
-    }*/
+    		else
+    		{
+       			weg.calc(data.robx, data.roby, data.robhoek, data.garx, data.gary);
+       			//weg.calc(1,1,45, 500, 650);
+	                cout << "Start Move" << endl;
+       			robert.ride(weg.getAngle(), weg.getDistance());
+        	        cout << "END Move" << endl;
+			cout << weg.getDistance()<<endl;
+			if(weg.getDistance() < 50)
+			{
+				int resultaat = robert.drop();
+				break;
+				delete robert;
+			}
+		}
 	}
+	cout << "is het gepakt? " << res << endl;
 
 	return 0;
 }
