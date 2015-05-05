@@ -29,8 +29,7 @@ Robodriver::~Robodriver()
 int Robodriver::execute(Action type, float distance)
 {
     char* cmd = buildCommand(type);
-    //moet misschien float zijn?
-    float duration = 0.0;
+    float duration = 0.0;		//Duration is wachttijd in seconden.
 
     if ((type == 1) || (type == 2))
     {
@@ -48,19 +47,24 @@ int Robodriver::execute(Action type, float distance)
     {
         duration = abs(distance)/MOVERATE;
     }
+    else if ( type == 5 || type == 6)
+    {
+	duration = 1.0;
+    }
 
     sendCommand(cmd);
-//    cout << "sending command "<<cmd<<endl;
     cout << "with duration " << duration * 1000<<endl;
     
+//    delay(duration * 1000);
     usleep(duration*1000);
-//    if(distance < 30)
-  //  { 
+
+    if(type != 5 && type != 6)
+    { 
     	char* stop = buildCommand(STOP);
     	printf("stopping this shit right here. \n");
     	sendCommand(stop);
     	delete[] stop;
-   // }
+    }
 
     
     delete[] cmd;
@@ -79,8 +83,8 @@ char* Robodriver::buildCommand(Action type)
         case 2:     prefix = 'q'; lspeed = SPEED; rspeed = -SPEED;      break; //rechts
         case 3:     prefix = 'q'; lspeed = SPEED; rspeed = SPEED;       break; //vooruit
         case 4:     prefix = 'q'; lspeed = -SPEED; rspeed = -SPEED;     break; //achteruit
-        case 5:     prefix = 'g'; grip = '0';                           break; //open
-        case 6:     prefix = 'g'; grip = '1';                           break; //dicht
+        case 5:     prefix = 'g'; grip = 1;                           break; //open
+        case 6:     prefix = 'g'; grip = 0;                           break; //dicht
         case 7:     prefix = 'u';                                       break; //distance sensor lezen
         case 8:     prefix = 't';                                       break; //power-on test
         case 0:     prefix = 'q'; lspeed = 0; rspeed = 0;               break; //stil (bij 0)
@@ -102,10 +106,9 @@ char* Robodriver::buildCommand(Action type)
     {
         command = "t";
     }
-	
-    else
+    else if( type == 5 || type == 6)
     {
-	command == "g " + toString(grip);
+	command = "g " + toString(grip);
     }
 
     cout << "	Dit zit er in command voor toevoeging:" << command <<endl;

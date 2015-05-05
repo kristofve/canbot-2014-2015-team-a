@@ -38,6 +38,14 @@ int main(int argc, char *argv[]) {
 	int status;
 	signal(SIGINT, &deleterob);
 
+
+	for(int i = 0; i < 100; i++)		//Initialiseren van de servogrijper.
+	{
+		int resultaat = robert.drop();
+	}
+	cout << "Opening the Claw." << endl;
+	sleep(2);
+
 	while(1)
 	{
 	       	data = client->getData();
@@ -49,11 +57,13 @@ int main(int argc, char *argv[]) {
        			robert.ride(weg.getAngle(), weg.getDistance());
         	        cout << "END Move" << endl;
 			cout << weg.getDistance()<<endl;
-			if(weg.getDistance() < 50)
+			if(weg.getDistance() < 50 && weg.getAngle() <10 && weg.getAngle() > -10)
 			{
 				int res=robert.grab();
-				if(res != -1)
-					break;
+				for(int i = 0; i < 100; i++)		//Initialiseren van de servogrijper.
+				{
+					int resultaat = robert.grab();
+				}
 				gepakt=true;
 			}
 		}
@@ -65,15 +75,17 @@ int main(int argc, char *argv[]) {
        			robert.ride(weg.getAngle(), weg.getDistance());
         	        cout << "END Move" << endl;
 			cout << weg.getDistance()<<endl;
-			if(weg.getDistance() < 50)
+			if(weg.getDistance() < 40)
 			{
 				int resultaat = robert.drop();
-				break;
-				delete robert;
+				for(int i = 0; i < 100; i++)		//Initialiseren van de servogrijper.
+				{	
+					int resultaat = robert.drop();
+				}
+				deleterob(0);
 			}
 		}
 	}
-	cout << "is het gepakt? " << res << endl;
 
 	return 0;
 }

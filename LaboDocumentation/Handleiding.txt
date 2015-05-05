@@ -1,0 +1,47 @@
+Gemaakt door: Sam Liekens, Wouter Duyols, Kristof Van Engeland, Nick Wouters en Sander Grielens.
+
+Mappenstructuur:
+Op github:
+/LaboDocumentation
+	Main.cpp
+	Makefile
+	/Pad
+		Pad.cpp
+		Pad.h
+	/UDP
+		Client.cpp
+		Client.h
+	/Robointerface
+		Robot.cpp
+		Robot.h
+		Robodriver.cpp
+		Robodriver.h
+
+Op de pi:
+CanbotTeamA/robo2015
+	Main.cpp
+	Makefile
+	/Pad
+		Pad.cpp
+		Pad.h
+	/UDP
+		Client.cpp
+		Client.h
+	/Robointerface
+		Robot.cpp
+		Robot.h
+		Robodriver.cpp
+		Robodriver.h
+	
+Hoe te runnen?
+Op de pi:
+	in de map CanbotTeamA/robo2015 voeren we het make commando uit. 
+	Uitvoeren van het programma gebeurt met ./CanbotA.
+
+Uitleg van de verschillende files:
+Main: Hoofdlus.
+/UDP: Ophalen van udp-pakketjes en juiste coordinaten doorsturen.
+/Pad: Met de coordinaten uit UDP de hoek en afstand tot blikje berekenen.
+/Robointerface:
+	Robot.cpp: Interface tussen Pad en Robodriver.
+	Robodriver.cpp: Bouwen van commando's en verzenden naar robot.
